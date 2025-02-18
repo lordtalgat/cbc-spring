@@ -1,0 +1,402 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://kz/alfabank/cbc"
+           targetNamespace="http://kz/alfabank/cbc" elementFormDefault="qualified">
+
+    <xs:element name="checkPhoneESPPRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="phone" type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="checkPhoneESPPResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="transactionCancelESPPRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="phoneNumber" type="xs:string" maxOccurs="1"/>
+                <xs:element name="amount" type="xs:double" maxOccurs="1"/>
+                <xs:element name="payId" type="xs:int" minOccurs="1"/>
+                <xs:element name="receiptId" type="xs:string" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="transactionCancelESPPResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="makePaymentESPPRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="phoneNumber" type="xs:string" maxOccurs="1"/>
+                <xs:element name="amount" type="xs:double" maxOccurs="1"/>
+                <xs:element name="sourceType" type="xs:int" minOccurs="1" default="1"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="makePaymentESPPResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="payId" type="xs:int" minOccurs="1"/>
+                <xs:element name="receiptId" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="purchaseInitiationMFSRequest">
+        <xs:complexType>
+            <xs:sequence>
+                        <xs:element name="phoneNumber" type="xs:string" minOccurs="1"/>
+                        <xs:element name="amount" type="xs:double" minOccurs="1"/>
+                        <xs:element name="merchantTxnId" type="xs:string" minOccurs="1"/>
+                        <xs:element name="merchantDescription" type="xs:string" minOccurs="1"/>
+                        <xs:element name="transactionDate" type="xs:string" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="purchaseInitiationMFSResponse">
+        <xs:complexType>
+            <xs:sequence>
+                        <xs:element name="transactionId" type="xs:string" minOccurs="1"/>
+                        <xs:element name="confirmationMode" type="xs:string" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="confirmTransactionMFSRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transactionId" type="xs:string" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="confirmTransactionMFSResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="merchantFee" type="xs:string" minOccurs="1" />
+                <xs:element name="customerFee" type="xs:string" minOccurs="1"/>
+                <xs:element name="merchantCommission" type="xs:string" minOccurs="1"/>
+                <xs:element name="amount" type="xs:double" minOccurs="1" />
+                <xs:element name="currency" type="xs:string" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="transactionApprovalMFSRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transactionId" type="xs:string" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="transactionApprovalMFSResponse">
+        <xs:complexType>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="chargeConfirmationMFSRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transactionId" type="xs:string" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="chargeConfirmationMFSResponse">
+        <xs:complexType>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="statusTransactionMFSRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transactionId" type="xs:string" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="statusTransactionMFSResponse">
+        <xs:complexType>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="refundTransactionMFSRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transactionId" type="xs:string" minOccurs="1"/>
+                <xs:element name="amount" type="xs:double" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="refundTransactionMFSResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="refundTransactionId" type="xs:string" minOccurs="1" />
+                <xs:element name="customerFee" type="xs:double" minOccurs="1"/>
+                <xs:element name="merchantFee" type="xs:double" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="hRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Header">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="extId" type="xs:string"/>
+                            <xs:element name="extDt" type="xs:string"/>
+                            <xs:element name="channel" type="xs:string" />
+                            <xs:element name="lang" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Body">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="trnType" type="xs:string" />
+                            <xs:element name="dscr" type="xs:string"/>
+                            <xs:element name="idnType" type="xs:string" />
+                            <xs:element name="amount" type="xs:double" />
+                            <xs:element name="xdata" type="xs:string" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="hResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Header">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="mfsId" type="xs:string" />
+                            <xs:element name="status" type="xs:int"/>
+                            <xs:element name="errCode" type="xs:int" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Body">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="postgpId" type="xs:string" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getBalanceCBCRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="phone" type="xs:string" minOccurs="1"/>
+                <xs:element name="option" type="xs:int" minOccurs="1" default="1"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getBalanceCBCResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="balance" type="xs:double" minOccurs="1" />
+                <xs:element name="all" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="creditESPPCBCRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="phoneNumber" type="xs:string" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="amount" type="xs:double" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="sourceType" type="xs:int" minOccurs="1" />
+                <xs:element name="transactionDate" type="xs:string" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="creditESPPCBCResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="payId" type="xs:int" minOccurs="1"/>
+                <xs:element name="receiptId" type="xs:string" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="debitMFSCBCRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="phoneNumber" type="xs:string" minOccurs="1"/>
+                <xs:element name="amount" type="xs:double" minOccurs="1"/>
+                <xs:element name="merchantTxnId" type="xs:string" minOccurs="1"/>
+                <xs:element name="merchantDescription" type="xs:string" minOccurs="1"/>
+                <xs:element name="transactionDate" type="xs:string" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="debitMFSCBCResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transactionId" type="xs:string" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="reversMFSCBCRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="transactionId" type="xs:string" minOccurs="1"/>
+                <xs:element name="amount" type="xs:double" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="systemcode"/>
+            <xs:attribute type="xs:string" name="reqid"/>
+            <xs:attribute type="xs:string" name="debug"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="reversMFSCBCResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="refundTransactionId" type="xs:string" minOccurs="1" />
+                <xs:element name="customerFee" type="xs:double" minOccurs="1"/>
+                <xs:element name="merchantFee" type="xs:double" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="code" type="xs:string" />
+            <xs:attribute name="systemcode" type="xs:string" />
+            <xs:attribute name="reqid" type="xs:string" />
+            <xs:attribute name="message" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="checkCallBDRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="function" type="xs:string"/>
+                <xs:element name="json" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="checkCallBDResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

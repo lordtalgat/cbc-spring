@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" name="MyApp" packages="kz.alfabank">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--Это простой консольный вывод -->
+            <PatternLayout pattern="msg:%m at %d{yyyy-MM-dd HH:mm:ss,SSS}"/>
+        </Console>
+
+        <Syslog name="syslog" format="RFC5424" host="${env:nt}" port="514"
+                protocol="UDP" appName="testlog4j" includeMDC="false" mdcId="testlog4j"
+                facility="LOCAL0" enterpriseNumber="18060" newLine="false"
+                messageId="Audit">
+            <LoggerFields>
+                <KeyValuePair key="thread" value="%t"/>
+                <KeyValuePair key="priority" value="%p"/>
+                <KeyValuePair key="category" value="%c"/>
+                <KeyValuePair key="exception" value="%ex"/>
+                <!--это обязательно нужно для фильтрации-->
+                <KeyValuePair key="procid" value="alfapr"/>
+            </LoggerFields>
+        </Syslog>
+
+    </Appenders>
+    <Loggers>
+        <!--Указываем что данные из класса HelloController и SomeController логируются все-->
+        <!--Сюда нужно добавлять все классы таким-же способом которые хотите логировать !!!-->
+        <Logger name="kz.alfabank.CBCEndpoint" level="ALL" additivity="false">
+            <AppenderRef ref="syslog"/>
+        </Logger>
+        <Logger name="kz.alfabank.MfsService" level="ALL" additivity="false">
+            <AppenderRef ref="syslog"/>
+        </Logger>
+        <Logger name="kz.alfabank.EsppService" level="ALL" additivity="false">
+            <AppenderRef ref="syslog"/>
+        </Logger>
+        <Logger name="kz.alfabank.PostGreeAdapter" level="ALL" additivity="false">
+            <AppenderRef ref="syslog"/>
+        </Logger>
+        <!--А это можно раскоментить при отладке и весь мусор будет сыпатся в консоль-->
+        <!-- <Root level="ALL">
+             <AppenderRef ref="Console"/>
+         </Root>-->
+     </Loggers>
+ </Configuration>
